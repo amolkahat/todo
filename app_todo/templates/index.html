@@ -1,0 +1,40 @@
+{% include 'layouts/header.html' %}
+
+<div class="container">
+    <div class="row">
+        {% if added %}
+            <div class="alert alert-success"> Record successfully added </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        {% if nothing %}
+            <div class="alert alert-success"> Record successfully added </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+        {% if list_tasks %}
+            <ul>
+                {% for task in list_tasks %}
+                    <li>task.task_text </li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            <h3> Nothing to display !!</h3>
+        {% endif %}
+        </div>
+        <div class="col">
+            <div class="row">
+                <form action="todo/add" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="task_text" placeholder="Task details">
+                    </div>
+                    <button type="submit" class="btn btn-primary"> Submit </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
