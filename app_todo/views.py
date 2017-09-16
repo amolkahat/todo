@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 
 from .models import tasks
@@ -21,5 +21,13 @@ def add_db(request):
     d = request.POST
     new_task.task_text = d['task_text']
     new_task.added_date = datetime.now()
+    new_task.completed_date = datetime.now()
     new_task.save()
-    return render(request, 'index.html', {'added': True})
+    return HttpResponseRedirect('/todo', {'added': True})
+
+def delete_db(request):
+    import pdb
+    pdb.set_trace()
+    tid = request.POST.get('id')
+    tasks.objects.filter(id=tid).delete()
+    return HttpResponseRedirect('/todo', {'deleted': True})

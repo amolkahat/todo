@@ -15,26 +15,44 @@
     <div class="row">
         <div class="col-8">
         {% if list_tasks %}
-            <ul>
-                {% for task in list_tasks %}
-                    <li>task.task_text </li>
-                {% endfor %}
-            </ul>
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                    <th> # </th>
+                    <th> Task Name </th>
+                    <th> Added date </th>
+                    <th> Completion date </th>
+                    <th> Action </th>
+                </thead>
+                <tbody>
+                    {% for task in list_tasks %}
+                    <tr>
+                        <th scope="row"> {{ task.id }} </th>
+                        <th> {{ task.task_text}} </th>
+                        <th> {{ task.added_date }} </th>
+                        <th> {{ task.completed_date }} </th>
+                        <th> 
+                            <a class="btn btn-primary" name='id' id='id' href="delete/{{task.id}}"> Delete
+                            </a>  </th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </ul>
 
-        {% else %}
-            <h3> Nothing to display !!</h3>
-        {% endif %}
-        </div>
-        <div class="col">
-            <div class="row">
-                <form action="todo/add" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="task_text" placeholder="Task details">
-                    </div>
-                    <button type="submit" class="btn btn-primary"> Submit </button>
-                </form>
+            {% else %}
+                <h3> Nothing to display !!</h3>
+            {% endif %}
+            </div>
+            <div class="col">
+                <div class="row">
+                    <form action="add" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="task_text" id="task_text" placeholder="Task details" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary"> Submit </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
