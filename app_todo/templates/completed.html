@@ -2,17 +2,6 @@
 
 <div class="container">
     <div class="row">
-        {% if added %}
-            <div class="alert alert-success"> Record successfully added </div>
-        {% endif %}
-    </div>
-    <div class="row">
-        {% if deleted %}
-            <div class="alert alert-success"> Record successfully added </div>
-        {% endif %}
-    </div>
-
-    <div class="row">
         <div class="col-8">
             <table class="table table-striped">
                 <thead class="thead-inverse">
@@ -20,7 +9,7 @@
                     <th> Task Name </th>
                     <th> Added date </th>
                     <th> Completion date </th>
-                    <th> Action </th>
+                    <!--th> Action </th-->
                 </thead>
                 <tbody>
                     {% if list_tasks %}
@@ -30,9 +19,9 @@
                         <td> {{ task.task_text}} </td>
                         <td> {{ task.added_date }} </td>
                         <td> {{ task.completed_date }} </td>
-                        <td><a class="btn btn-success" name='id' id='id' href='complete/{{task.id}}'> Done </a> 
+                        <!--td><a class="btn btn-success" name='id' id='id' href='complete/{{task.id}}'> Done </a> 
                             <a class="btn btn-danger" name='id' id='id' href="delete/{{task.id}}"> Delete
-                            </a>  </td>
+                            </a>  </td-->
                     </tr>
                         {% endfor %}
                         {% else %}
@@ -42,17 +31,6 @@
                 </table>
                 </ul>
 
-            </div>
-            <div class="col">
-                <div class="row">
-                    <form action="add" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="task_text" id="task_text" placeholder="Task details" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary"> Submit </button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
